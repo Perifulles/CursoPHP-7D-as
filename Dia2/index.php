@@ -55,5 +55,7 @@ Metodología Curso Evolutivo PHP (Vicente) — floridaoberta.com
 </div>
 
 <script src="../assets/aula-profesor.js"></script>
+
+<div id="mendigo-btn" onclick="window.location.href='../sobre-mi.php'" title="¿Quién hizo esto? ☕"><img src="../images/mendigo.jpg" alt="Miguel"></div>
 </body>
 </html>

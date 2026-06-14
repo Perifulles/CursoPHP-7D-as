@@ -1,24 +1,52 @@
 <?php
 /**
- * download.php — Descarga de recursos del Curso Final de Héctor
+ * download.php — Descarga de recursos del Curso Final
  * Parámetros:
- *   ?type=word  → descarga Plan_Recuperacion_PHP_Hector.docx
- *   ?type=zip   → descarga un ZIP con todo el proyecto
+ *   ?type=word  → descarga Plan_Recuperacion_PHP.docx
+ *   ?type=zip   → descarga CURSO FINAL.zip (pre-generado)
+ *   ?type=ia    → descarga agente-ia-tutor-php.md
  */
 
 $type = $_GET['type'] ?? '';
 
 // ──────────────────────────────────────────────────────────────────
+//  Rate limiting: bloquear si más de 10 descargas en 60 segundos por IP
+// ──────────────────────────────────────────────────────────────────
+$ip         = $_SERVER['REMOTE_ADDR'] ?? 'unknown';
+$logFile    = sys_get_temp_dir() . '/dl_log_' . md5($ip) . '.json';
+$window     = 60;   // segundos
+$maxDescargas = 10; // máximo permitido en ese ventana
+
+// Cargar el historial de timestamps de esta IP
+$timestamps = [];
+if (file_exists($logFile)) {
+    $data = json_decode(file_get_contents($logFile), true);
+    if (is_array($data)) $timestamps = $data;
+}
+
+// Descartar timestamps fuera de la ventana
+$now = time();
+$timestamps = array_filter($timestamps, fn($t) => ($now - $t) < $window);
+
+// Comprobar si supera el límite
+if (count($timestamps) >= $maxDescargas) {
+    http_response_code(429);
+    header('Retry-After: ' . $window);
+    exit('Demasiadas descargas en poco tiempo. Espera un minuto.');
+}
+
+// Registrar esta descarga
+$timestamps[] = $now;
+file_put_contents($logFile, json_encode(array_values($timestamps)));
+
+// ──────────────────────────────────────────────────────────────────
 //  Word download
 // ──────────────────────────────────────────────────────────────────
 if ($type === 'word') {
-    $file = __DIR__ . '/Plan_Recuperacion_PHP_Hector.docx';
-    if (!file_exists($file)) {
-        http_response_code(404);
-        exit('Archivo no encontrado.');
-    }
+    $file = __DIR__ . '/Plan_Recuperacion_PHP.docx';
+    if (!file_exists($file)) { http_response_code(404); exit('Archivo no encontrado.'); }
     header('Content-Type: application/vnd.openxmlformats-officedocument.wordprocessingml.document');
-    header('Content-Disposition: attachment; filename="Plan_Recuperacion_PHP_Hector.docx"');
+    header('Content-Disposition: attachment; filename="Plan_Recuperacion_PHP.docx"');
     header('Content-Length: ' . filesize($file));
     header('Cache-Control: no-cache, no-store');
     readfile($file);
@@ -29,62 +57,27 @@ if ($type === 'word') {
 //  ZIP download
 // ──────────────────────────────────────────────────────────────────
 if ($type === 'zip') {
-    if (!class_exists('ZipArchive')) {
-        http_response_code(500);
-        exit('Extensión ZIP no disponible en el servidor.');
-    }
-
-    $tmpFile = tempnam(sys_get_temp_dir(), 'cursofinal_') . '.zip';
-    $zip     = new ZipArchive();
-    if ($zip->open($tmpFile, ZipArchive::CREATE | ZipArchive::OVERWRITE) !== true) {
-        http_response_code(500);
-        exit('No se pudo crear el ZIP.');
-    }
-
-    $root    = realpath(__DIR__);
-    $rootLen = strlen($root) + 1;
-
-    // Directorios y extensiones a excluir
-    $skipDirs = ['.git', '.vscode', 'mysql_data'];
-    $skipExts = []; // incluir todo
-
-    $iter = new RecursiveIteratorIterator(
-        new RecursiveDirectoryIterator($root, RecursiveDirectoryIterator::SKIP_DOTS),
-        RecursiveIteratorIterator::LEAVES_ONLY
-    );
-
-    foreach ($iter as $file) {
-        if ($file->isDir()) continue;
-
-        $realPath = $file->getRealPath();
-        $relPath  = substr($realPath, $rootLen);
-
-        // Skip hidden/unwanted dirs
-        $parts = explode(DIRECTORY_SEPARATOR, $relPath);
-        $skip  = false;
-        foreach ($parts as $part) {
-            if (in_array($part, $skipDirs, true) || str_starts_with($part, '.')) {
-                $skip = true;
-                break;
-            }
-        }
-        if ($skip) continue;
-
-        // Skip this script itself generating the zip
-        if ($realPath === realpath(__FILE__)) continue;
-
-        $zipPath = str_replace(DIRECTORY_SEPARATOR, '/', 'CursoFinal_Hector/' . $relPath);
-        $zip->addFile($realPath, $zipPath);
-    }
-
-    $zip->close();
-
+    $file = __DIR__ . '/CURSO FINAL.zip';
+    if (!file_exists($file)) { http_response_code(404); exit('El archivo ZIP no está disponible. Contacta al autor.'); }
     header('Content-Type: application/zip');
-    header('Content-Disposition: attachment; filename="CursoFinal_Hector.zip"');
-    header('Content-Length: ' . filesize($tmpFile));
+    header('Content-Disposition: attachment; filename="CURSO FINAL.zip"');
+    header('Content-Length: ' . filesize($file));
     header('Cache-Control: no-cache, no-store');
-    readfile($tmpFile);
-    unlink($tmpFile);
+    readfile($file);
+    exit;
+}
+
+// ──────────────────────────────────────────────────────────────────
+//  Agente IA download
+// ──────────────────────────────────────────────────────────────────
+if ($type === 'ia') {
+    $file = __DIR__ . '/agente-ia-tutor-php.md';
+    if (!file_exists($file)) { http_response_code(404); exit('Archivo no encontrado.'); }
+    header('Content-Type: text/markdown; charset=utf-8');
+    header('Content-Disposition: attachment; filename="agente-ia-tutor-php.md"');
+    header('Content-Length: ' . filesize($file));
+    header('Cache-Control: no-cache, no-store');
+    readfile($file);
     exit;
 }
 
@@ -92,4 +85,4 @@ if ($type === 'zip') {
 //  Petición inválida
 // ──────────────────────────────────────────────────────────────────
 http_response_code(400);
-exit('Tipo de descarga no válido. Usa ?type=word o ?type=zip');
+exit('Tipo de descarga no válido. Usa ?type=word, ?type=zip o ?type=ia');

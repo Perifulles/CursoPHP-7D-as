@@ -119,6 +119,7 @@
             color: #e65100
         }
     </style>
+<link rel="stylesheet" href="../assets/aula-profesor.css">
 </head>
 
 <body>
@@ -371,6 +372,8 @@ $_SESSION → Mantiene el estado entre peticiones (usuario logueado, etc.).</pre
 
     <div class="warn"><b>📊 Tu nota y comparativa:</b> Simulacro 1: ___ /10 → Simulacro 2: ___ /10. Si has subido o mantenido por encima de 5, vas bien. Lista de conceptos fallados hoy: ______. Mañana: repaso flash de esos conceptos + Simulacro 3 final.</div>
 
+
+<div id="mendigo-btn" onclick="window.location.href='../sobre-mi.php'" title="¿Quién hizo esto? ☕"><img src="../images/mendigo.jpg" alt="Miguel"></div>
 </body>
 
 </html>

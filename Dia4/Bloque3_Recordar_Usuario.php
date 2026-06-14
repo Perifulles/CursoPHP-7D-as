@@ -116,4 +116,6 @@ pre .kw{color:#cba6f7}pre .fn{color:#89b4fa}pre .str{color:#a6e3a1}pre .var{colo
 <div class="tip"><b>✅ Si los 4 ejercicios funcionan en secuencia</b>, tienes el Ejercicio 5 del examen resuelto. El patrón es: login crea cookie → al cargar se comprueba cookie → logout borra cookie.</div>
 <div class="zona-practica"><h2>⚡ Tu salida</h2><?php if(trim(strip_tags($salidaEjercicios))===''):?><p style="color:#64748b;font-style:italic">Escribe tu solución arriba y recarga.</p><?php else: echo $salidaEjercicios; endif;?></div>
 <script src="../assets/aula-profesor.js"></script>
+
+<div id="mendigo-btn" onclick="window.location.href='../sobre-mi.php'" title="¿Quién hizo esto? ☕"><img src="../images/mendigo.jpg" alt="Miguel"></div>
 </body></html>

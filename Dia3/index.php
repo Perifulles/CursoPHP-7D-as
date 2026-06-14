@@ -17,4 +17,6 @@
 <div class="card"><a href="Bloque4_Integrador.php">🧩 Bloque 4: Integrador — Clínica Veterinaria <span class="badge b4">TODO</span></a><p>CRUD completo con MySQL, herencia con instanciación condicional, teoría MVC aplicada.</p><p class="time">⏱️ 30–40 minutos</p></div>
 <div class="footer">Plan de Recuperación PHP — Héctor — Tutor: Miguel Pérez</div>
 <script src="../assets/aula-profesor.js"></script>
+
+<div id="mendigo-btn" onclick="window.location.href='../sobre-mi.php'" title="¿Quién hizo esto? ☕"><img src="../images/mendigo.jpg" alt="Miguel"></div>
 </body></html>

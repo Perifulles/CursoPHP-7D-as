@@ -158,4 +158,6 @@ $rebajado->setPrecio(100); echo $rebajado->getPrecio(); <span class="cm">// 90�
 <?php else: echo $salidaEjercicios; endif;?>
 </div>
 <script src="../assets/aula-profesor.js"></script>
+
+<div id="mendigo-btn" onclick="window.location.href='../sobre-mi.php'" title="¿Quién hizo esto? ☕"><img src="../images/mendigo.jpg" alt="Miguel"></div>
 </body></html>

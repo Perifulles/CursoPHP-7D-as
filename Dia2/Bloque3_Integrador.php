@@ -149,4 +149,6 @@ pre .kw{color:#cba6f7}pre .fn{color:#89b4fa}pre .str{color:#a6e3a1}pre .var{colo
 <?php else: echo $salidaEjercicios; endif;?>
 </div>
 <script src="../assets/aula-profesor.js"></script>
+
+<div id="mendigo-btn" onclick="window.location.href='../sobre-mi.php'" title="¿Quién hizo esto? ☕"><img src="../images/mendigo.jpg" alt="Miguel"></div>
 </body></html>

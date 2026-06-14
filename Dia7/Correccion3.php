@@ -2,7 +2,8 @@
 <title>Día 7 — Corrección Simulacro 3</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}body{font-family:Arial,sans-serif;max-width:900px;margin:0 auto;padding:30px;background:#fafafa;color:#222;line-height:1.65}h1{color:#1b5e20;border-bottom:3px solid #1b5e20;padding-bottom:10px;margin:30px 0 20px;font-size:1.8em}h2{color:#283593;margin:25px 0 12px;font-size:1.3em}p{margin:8px 0 12px}pre{background:#1e1e2e;color:#cdd6f4;padding:16px 20px;border-radius:8px;overflow-x:auto;font-size:.88em;line-height:1.5;margin:12px 0;white-space:pre-wrap}code{background:#e8eaf6;padding:2px 6px;border-radius:4px;font-size:.9em;color:#283593}.sol{background:#fff;border:2px solid #a5d6a7;border-radius:10px;padding:18px 22px;margin:18px 0}.sol h2{color:#1b5e20;margin-top:0}.criterio{background:#fffde7;border-left:4px solid #fbc02d;padding:10px 16px;border-radius:0 8px 8px 0;margin:10px 0;font-size:.92em}.criterio b{color:#f57f17}.back{display:inline-block;margin-bottom:20px;color:#546E7A;text-decoration:none;font-size:.9em}.back:hover{color:#1A237E}.header-badge{display:inline-block;background:#1b5e20;color:#fff;padding:6px 16px;border-radius:20px;font-size:.85em;margin-bottom:8px}.warn{background:#fff3e0;border-left:4px solid #e65100;padding:14px 18px;border-radius:0 8px 8px 0;margin:16px 0}.warn b{color:#e65100}.tip{background:#e8f5e9;border-left:4px solid #2e7d32;padding:14px 18px;border-radius:0 8px 8px 0;margin:16px 0}.tip b{color:#2e7d32}
-</style></head><body>
+</style>
+<link rel="stylesheet" href="../assets/aula-profesor.css"></head><body>
 <a class="back" href="index.php">← Volver al Día 7</a>
 <span class="header-badge">✅ CORRECCIÓN — Simulacro 3</span>
 <h1>Soluciones: Cafetería CafeCode</h1>
@@ -273,4 +274,6 @@ E) MODELO — clase que representa los datos, con herencia.</pre>
 
 <div class="tip"><b>📊 Cierre de la semana:</b> Simulacro 1: ___ · Simulacro 2: ___ · Simulacro 3: ___. Si la tendencia es ascendente y el S3 está por encima de 5, estás listo. Esta tarde NO programes más: repaso ligero en papel (Singleton de memoria, el patrón fetch+if, el setcookie con opciones), cena bien y duerme 8 horas. El examen es el mismo formato que llevas 3 días haciendo. 💪</div>
 
+
+<div id="mendigo-btn" onclick="window.location.href='../sobre-mi.php'" title="¿Quién hizo esto? ☕"><img src="../images/mendigo.jpg" alt="Miguel"></div>
 </body></html>

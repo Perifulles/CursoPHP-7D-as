@@ -124,6 +124,16 @@ const soluciones = [
 
   // ────────────── DÍA 3 — BLOQUE 1: PDO (patrón Vicente) ──────────────
   {
+    test: /Entiende la clase Conexion|antes de crearla/i,
+    pistas: [
+      'a) Si cambias la contraseña solo tocas config.json, no todos los archivos PHP que se conectan.',
+      'b) "mysql" es el nombre del contenedor en la red interna de Docker. Desde fuera (tu PC) sería localhost, pero PHP corre dentro del contenedor y ve la red Docker.',
+      'c) DSN = "mysql:host=mysql;dbname=dia3_ejercicios;charset=utf8mb4". Tres partes: tipo de BD (mysql:), servidor y BD (host=...;dbname=...), codificación (charset=).',
+      'd) $this->conn es privada — no se puede acceder desde fuera de la clase. getConn() expone solo lo necesario (encapsulación).'
+    ],
+    solucion: "echo 'a) Para no repetir credenciales en cada archivo. Si cambias la contraseña, solo editas config.json.<br>';\necho 'b) En Docker, los contenedores se comunican por nombre. PHP corre en el contenedor php, MySQL en el contenedor mysql.<br>';\necho 'c) DSN identifica el tipo de BD y dónde está: mysql:host=mysql;dbname=dia3_ejercicios;charset=utf8mb4<br>';\necho 'd) $this->conn es privada. getConn() es el getter que la expone de forma controlada (encapsulación).';"
+  },
+  {
     test: /config\.json/i,
     pistas: ['Crea el JSON como string: $configData = \'{\"host\":\"localhost\",...}\';','Decodifica: $config = json_decode($configData, true);','Lee cada campo: echo $config[\"host\"]; echo $config[\"db\"]; etc.'],
     solucion: "$configData = '{\"host\":\"localhost\",\"userName\":\"root\",\"password\":\"\",\"db\":\"mi_tienda\"}';\n$config = json_decode($configData, true);\necho \"Host: \" . $config[\"host\"] . \"<br>\";\necho \"User: \" . $config[\"userName\"] . \"<br>\";\necho \"DB: \" . $config[\"db\"];"

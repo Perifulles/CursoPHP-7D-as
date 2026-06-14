@@ -159,4 +159,6 @@ ol,ul{margin:8px 0 12px 24px}li{margin:4px 0}
 </div>
 
 <script src="../assets/aula-profesor.js"></script>
+
+<div id="mendigo-btn" onclick="window.location.href='../sobre-mi.php'" title="¿Quién hizo esto? ☕"><img src="../images/mendigo.jpg" alt="Miguel"></div>
 </body></html>

@@ -37,3 +37,9 @@
 
 /* ── Separador entre zona de pistas y zona de práctica ── */
 .pistas-container{border-top:1px dashed #e0e0e0;margin-top:14px;padding-top:10px}
+
+/* ── Botón flotante mendigo ── */
+#mendigo-btn{position:fixed;bottom:24px;right:24px;width:64px;height:64px;border-radius:50%;overflow:hidden;cursor:pointer;box-shadow:0 4px 18px rgba(0,0,0,.25);z-index:9999;animation:mendigo-bounce 3s ease-in-out infinite;transition:transform .2s}
+#mendigo-btn:hover{transform:scale(1.15);animation:none}
+#mendigo-btn img{width:100%;height:100%;object-fit:cover}
+@keyframes mendigo-bounce{0%,100%{transform:translateY(0) scale(1)}30%{transform:translateY(-12px) scale(1.08)}60%{transform:translateY(-4px) scale(1.02)}}

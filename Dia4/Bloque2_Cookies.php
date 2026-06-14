@@ -107,4 +107,6 @@ pre .kw{color:#cba6f7}pre .fn{color:#89b4fa}pre .str{color:#a6e3a1}pre .var{colo
 <div class="tip"><b>✅ Resumen:</b> setcookie() para crear, $_COOKIE para leer, setcookie con time pasado para borrar. Siempre ANTES de HTML. $_COOKIE se actualiza en la siguiente recarga.</div>
 <div class="zona-practica"><h2>⚡ Tu salida</h2><?php if(trim(strip_tags($salidaEjercicios))===''):?><p style="color:#64748b;font-style:italic">Escribe tu solución arriba y recarga.</p><?php else: echo $salidaEjercicios; endif;?></div>
 <script src="../assets/aula-profesor.js"></script>
+
+<div id="mendigo-btn" onclick="window.location.href='../sobre-mi.php'" title="¿Quién hizo esto? ☕"><img src="../images/mendigo.jpg" alt="Miguel"></div>
 </body></html>

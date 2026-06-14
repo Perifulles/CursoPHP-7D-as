@@ -119,4 +119,6 @@ $salidaEjercicios = ob_get_clean();
 <?php if(trim(strip_tags($salidaEjercicios))===''):?><p style="color:#64748b;font-style:italic">Escribe tus soluciones en la parte PHP del archivo y recarga.</p><?php else: echo $salidaEjercicios; endif;?>
 </div>
 <script src="../assets/aula-profesor.js"></script>
+
+<div id="mendigo-btn" onclick="window.location.href='../sobre-mi.php'" title="¿Quién hizo esto? ☕"><img src="../images/mendigo.jpg" alt="Miguel"></div>
 </body></html>

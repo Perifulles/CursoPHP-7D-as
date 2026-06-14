@@ -180,4 +180,6 @@ $salidaEjercicios = ob_get_clean();
 <div class="tip"><b>✅ ¿Todo en verde?</b> Pasa al <a href="Bloque1_Repaso_PDO.php"><strong>Bloque 1: Repaso PDO</strong></a> y empieza a construir tu clase Conexion.</div>
 
 <script src="../assets/aula-profesor.js"></script>
+
+<div id="mendigo-btn" onclick="window.location.href='../sobre-mi.php'" title="¿Quién hizo esto? ☕"><img src="../images/mendigo.jpg" alt="Miguel"></div>
 </body></html>
