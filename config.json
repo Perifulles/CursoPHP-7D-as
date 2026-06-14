@@ -1,0 +1,6 @@
+{
+    "host": "mysql",
+    "userName": "root",
+    "password": "root",
+    "db": "dia3_ejercicios"
+}
