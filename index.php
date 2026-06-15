@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Plan de Recuperación PHP</title>
+    <title>Plan de estudio intensivo PHP</title>
     <link rel="stylesheet" href="assets/aula-profesor.css">
     <style>
         * {
