@@ -1,0 +1,8 @@
+.git
+**/.DS_Store
+__MACOSX
+.env
+.env.*
+DESPLIEGUE_*.md
+INFRAESTRUCTURA_*.md
+Infraestructura_*.md

@@ -1,0 +1,45 @@
+# Dockerfile.prod — imagen de PRODUCCIÓN para ph.perifulles.es (sin MySQL)
+FROM php:8.3-apache
+
+# Solo lo necesario. pdo_sqlite ya viene en la imagen base (Dia3 usa sqlite::memory).
+RUN apt-get update && apt-get install -y --no-install-recommends libzip-dev \
+ && docker-php-ext-install zip \
+ && rm -rf /var/lib/apt/lists/*
+
+# --- Endurecido de PHP ---
+RUN { \
+      echo 'expose_php = Off'; \
+      echo 'display_errors = Off'; \
+      echo 'log_errors = On'; \
+      echo 'session.save_path = "/tmp"'; \
+      echo 'session.cookie_httponly = 1'; \
+      echo 'session.cookie_samesite = "Strict"'; \
+    } > /usr/local/etc/php/conf.d/zz-prod.ini
+
+# --- Endurecido de Apache: sin versión, sin autoindex, deniega ocultos y recursos ---
+RUN a2enmod headers rewrite \
+ && printf '%s\n' \
+      'ServerTokens Prod' \
+      'ServerSignature Off' \
+      '<Directory /var/www/html>' \
+      '    Options -Indexes -Includes' \
+      '    AllowOverride None' \
+      '</Directory>' \
+      '<FilesMatch "^\.">' \
+      '    Require all denied' \
+      '</FilesMatch>' \
+      '<FilesMatch "\.(json|sql|md|docx|zip|log|ya?ml|dockerfile|gitignore|dockerignore)$">' \
+      '    Require all denied' \
+      '</FilesMatch>' \
+      '<IfModule mod_headers.c>' \
+      '    Header always set X-Content-Type-Options "nosniff"' \
+      '    Header always set X-Frame-Options "SAMEORIGIN"' \
+      '    Header always set Referrer-Policy "strict-origin-when-cross-origin"' \
+      '    Header unset X-Powered-By' \
+      'EOF' \
+ | sed 's/^EOF$/<\/IfModule>/' > /etc/apache2/conf-available/zz-hardening.conf \
+ && a2enconf zz-hardening
+
+WORKDIR /var/www/html
+COPY . /var/www/html
+RUN chown -R www-data:www-data /var/www/html
