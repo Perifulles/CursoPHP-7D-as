@@ -466,7 +466,7 @@
         </div>
     </div>
 
-    <h1>📚 Plan de Recuperación PHP</h1>
+    <h1>📚 Plan de Estudio Intensivo PHP</h1>
     <p class="sub">Semana del 9 al 15 de junio de 2026</p>
 
     <div class="week">
@@ -522,7 +522,7 @@
     </div>
 
     <div class="footer">
-        Plan de Recuperación PHP — Autor: Miguel Pérez Sánchez<br>
+        Plan de Estudio Intensivo PHP — Autor: Miguel Pérez Sánchez<br>
         Metodología Curso Evolutivo PHP (Vicent) — floridaoberta.com
     </div>
 
